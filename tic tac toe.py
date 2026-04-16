@@ -99,7 +99,7 @@ def play():
             game = False
         elif spaces[2] != " " and spaces[2] == spaces[4] and spaces[4] == spaces[6]:
             print(f"Player {spaces[6]} won!")
-            score(8)
+            score(6)
             game = False
     
 def main():
