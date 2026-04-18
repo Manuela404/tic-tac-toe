@@ -1,0 +1,1 @@
+[{'amounts': '1000', 'category': 'food', 'description': 'grocery'}, {'amounts': '100', 'category': 'Entertainment', 'description': 'arcade'}, {'amounts': '150000', 'category': 'Rent', 'description': 'school expense'}]
