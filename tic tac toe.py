@@ -36,7 +36,7 @@ def computerMove():
            spaces[compMove] = computer
            compvalid = False
             
-
+#Function your user move
 def move():
     notlegit = True
     while notlegit:
@@ -46,9 +46,7 @@ def move():
            
             notlegit = False
 
-def score(position):
-    global scoreO
-    global scoreX
+def score(position,scoreO,scoreX):
     if spaces[position] == "X":
         scoreX+=1
         print(f"X: {scoreX}\nO: {scoreO}")
@@ -58,9 +56,16 @@ def score(position):
     scoresData['X'] = scoreX
     scoresData['o'] = scoreO
     savefile(str(scoresData),filename)
+game = True
 
-def play():         
-    game = True         
+def check_win(position1,position2,position3):
+      if  spaces[position1] != " " and spaces[position1] == spaces[position2] and spaces[position1] == spaces[position3]:
+            print(f"Player {spaces[position1]} won!")
+            score(0,scoreO,scoreX)
+            game = False
+            return game
+
+def play():                  
     while game:
         move()
         if " " not in spaces :
@@ -69,39 +74,18 @@ def play():
         else :
             computerMove()
             drawBoard()
-        if  spaces[0] != " " and spaces[0] == spaces[1] and spaces[1] == spaces[2]:
-            print(f"Player {spaces[0]} won!")
-            score(0)
-            game = False
-        elif spaces[3] != " " and spaces[3] == spaces[4] and spaces[4] == spaces[5]:
-            print(f"Player {spaces[5]} won!")
-            score(5)
-            game = False
-        elif spaces[6] != " " and spaces[6] == spaces[7] and spaces[7] == spaces[8]:
-            print(f"Player {spaces[8]} won!")
-            score(8)
-            game = False
-        elif spaces[0] != " " and spaces[0] == spaces[3] and spaces[3] == spaces[6]:
-            print(f"Player {spaces[6]} won!")
-            score(6)
-            game = False
-        elif spaces[1] != " " and spaces[1] == spaces[4] and spaces[4] == spaces[7]:
-            print(f"Player {spaces[7]} won!")
-            score(7)
-            game = False
-        elif spaces[2] != " " and spaces[2] == spaces[5] and spaces[5] == spaces[8]:
-            print(f"Player {spaces[8]} won!")
-            score(8)
-            game = False
-        elif spaces[0] != " " and spaces[0] == spaces[4] and spaces[8] == spaces[4]:
-            print(f"Player {spaces[8]} won!")
-            score(8)
-            game = False
-        elif spaces[2] != " " and spaces[2] == spaces[4] and spaces[4] == spaces[6]:
-            print(f"Player {spaces[6]} won!")
-            score(8)
-            game = False
-    
+             #checks for horizontal win
+            check_win(0,1,2)
+            check_win(3,4,5)
+            check_win(6,7,8)  
+            #checks for vertical win
+            check_win(0,3,6)
+            check_win(1,4,7)        
+            check_win(2,5,8)  
+            #checks for across win
+            check_win(0,4,8)    
+            check_win(2,4,6)    
+ 
 def main():
     while True:
         choice = input('1.Play game\n2.Check scoreboard\n3.Exist game\n')
